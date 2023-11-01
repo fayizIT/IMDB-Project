@@ -11,11 +11,7 @@ const MovieList = () => {
 
   useEffect(() => {
     getData();
-  }, []);
-
-  useEffect(() => {
-    getData();
-  }, [type]);
+  }, [type]); // Include 'getData' in the dependency array
 
   const getData = () => {
     fetch(

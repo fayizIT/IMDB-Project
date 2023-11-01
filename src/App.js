@@ -1,5 +1,4 @@
-// App.js
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/header/Header';
@@ -9,12 +8,10 @@ import Movie from './pages/home/movieDetail/movie';
 import Favorites from './components/Favorites/Favorites';
 
 function App() {
- 
-
   return (
     <div className="App">
       <Router>
-        <Header  /> {/* Pass the props */}
+        <Header />
         <Routes>
           <Route index element={<Home />} />
           <Route path="movie/:id" element={<Movie />} />
