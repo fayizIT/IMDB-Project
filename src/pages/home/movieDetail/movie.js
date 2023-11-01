@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 const Movie = () => {
   const [currentMovieDetail, setMovie] = useState();
   const [isRatingModalOpen, setRatingModalOpen] = useState(false);
-  const [selectedRating, setSelectedRating] = useState(0); // State to track the selected star rating.
+  const [selectedRating, setSelectedRating] = useState(0);
+  const [comment, setComment] = useState(""); // State for user comments
   const { id } = useParams();
 
   useEffect(() => {
@@ -24,9 +25,9 @@ const Movie = () => {
   }, [id]);
 
   useEffect(() => {
-    // Load user rating from local storage
-    const ratings = JSON.parse(localStorage.getItem("movieRatings")) || {};
-    setSelectedRating(ratings[id] || 0);
+    const storedComments = JSON.parse(localStorage.getItem("movieComments")) || {};
+    const storedComment = storedComments[id] || "";
+    setComment(storedComment);
   }, [id]);
 
   const openRatingModal = () => {
@@ -38,16 +39,23 @@ const Movie = () => {
   };
 
   const handleRatingChange = (rating) => {
-    setSelectedRating(rating); // Update the selected star rating.
+    setSelectedRating(rating);
+  };
+
+  const handleCommentChange = (event) => {
+    setComment(event.target.value);
   };
 
   const handleRatingSubmit = () => {
-    // Store user rating in local storage for the current movie
     const ratings = JSON.parse(localStorage.getItem("movieRatings")) || {};
     ratings[id] = selectedRating;
     localStorage.setItem("movieRatings", JSON.stringify(ratings));
 
-    // Close the rating modal
+    // Store the comment in local storage
+    const comments = JSON.parse(localStorage.getItem("movieComments")) || {};
+    comments[id] = comment;
+    localStorage.setItem("movieComments", JSON.stringify(comments));
+
     closeRatingModal();
   };
 
@@ -144,11 +152,19 @@ const Movie = () => {
                   key={rating}
                   className={`star ${selectedRating >= rating ? "selected" : ""}`}
                   onClick={() => handleRatingChange(rating)}
-                  onMouseEnter={() => handleRatingChange(rating)} // Handle mouse hover effect
+                  onMouseEnter={() => handleRatingChange(rating)}
                 >
                   ★
                 </span>
               ))}
+            </div>
+            {/* Add a text input for comments */}
+            <div className="comment-input">
+              <textarea
+                value={comment}
+                onChange={handleCommentChange}
+                placeholder="Add your comments here..."
+              />
             </div>
             <div className="rating-button">
               <button onClick={handleRatingSubmit} className="colorful-button">
