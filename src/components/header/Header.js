@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 
-const Header = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  
-  
+const Header = ({ movies, setFilteredMovies }) => {
+
 
   return (
     <div className="header">
@@ -31,21 +29,7 @@ const Header = () => {
         </Link>
       </div>
 
-      <div className="searchBar">
-        <input
-          type="text"
-          placeholder="Search movies..."
-          value={searchQuery}
-          onChange={(e)=> {
-            setSearchQuery(e.target.value)
-          }}
-        />
-        
-        <button onClick={()=>{
-         
-          
-        }} >Search </button>
-      </div>
+
     </div>
   );
 };

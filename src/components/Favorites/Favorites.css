@@ -1,0 +1,95 @@
+.cards {
+    display: inline-block;
+    transition: transform .2s;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0.19rem;
+    cursor: pointer;
+    width: 200px; /* Set a fixed width */
+    height: 330px; /* Set a fixed height */
+    border: 1px solid rgb(99, 99, 99);
+    display: flex;
+    flex-direction: column; /* Display images vertically like cards */
+}
+
+.cards:hover {
+    transform: scale(1.05);
+    z-index: 1000;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.favorite-card img {
+    max-height: 350px; /* Set the maximum height you desire */
+    width: auto; /* Allow the width to adjust proportionally */
+  }
+  
+
+.cards__overlay {
+    position: absolute;
+    padding: 0 1rem 1rem 1rem;
+    bottom: 0px;
+    height: 80px; /* Adjust the height of the overlay */
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    justify-content: flex-end;
+    background-image: linear-gradient(rgb(0, 0, 0, 0), rgb(0, 0, 0, 1));
+    opacity: 0;
+    transition: opacity .2s;
+}
+
+.cards:hover .cards__overlay {
+    opacity: 1;
+}
+
+.card__title {
+    font-weight: 900;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+card__runtime {
+    font-size: .75rem;
+    margin-bottom: 0.1rem;
+}
+
+.card__rating {
+    float: right;
+}
+
+card__description {
+    font-style: italic;
+    font-size: .75rem;
+    margin-bottom: 0.1rem;
+}
+
+.red-heart {
+    color: red;
+}
+
+.star-icon {
+    font-size: 1.5rem;
+    color: #ffcc00;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+
+.favorite-card {
+    display: inline-block;
+    transition: transform 0.2s;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px; /* Add margin to create space between cards */
+    width: 200px;
+    height: 330px;
+    border: 1px solid rgb(99, 99, 99);
+}
+  
+  .favorite-card:hover {
+    transform: scale(1.05);
+    z-index: 1000;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }

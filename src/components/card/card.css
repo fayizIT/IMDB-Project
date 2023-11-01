@@ -36,7 +36,7 @@
     transition: opacity .2s;
 }   
 
-.cards__overlay:hover {
+.cards:hover .cards__overlay {
     opacity: 1;
 }
 
@@ -61,11 +61,16 @@
     margin-bottom: 0.25rem;
 }
 
-
 .red-heart {
     color: red;
-  }
+}
 
+.custom-heart-icon {
+    font-size: 1.5rem; 
+    color: #fffcfcf8; 
+    cursor: pointer; 
+    margin-left: 5px; 
+}
 
 
 

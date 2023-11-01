@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./movie.css";
 import { useParams } from "react-router-dom";
+import Header from "../../../components/header/Header";
 
 const Movie = () => {
   const [currentMovieDetail, setMovie] = useState();
@@ -14,29 +15,45 @@ const Movie = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    // Load user rating from local storage
+    const ratings = JSON.parse(localStorage.getItem("movieRatings")) || {};
+    setUserRating(ratings[id] || 0);
+
+    // Set the selectedRating based on the loaded user rating
+    setSelectedRating(ratings[id] || 0);
+  }, [id]);
+
   const getData = () => {
-    fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`)
+    fetch(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
+    )
       .then((res) => res.json())
       .then((data) => setMovie(data));
-  }
+  };
 
   const openRatingModal = () => {
     setRatingModalOpen(true);
-  }
+  };
 
   const closeRatingModal = () => {
     setRatingModalOpen(false);
-  }
+  };
 
   const handleRatingChange = (rating) => {
     setSelectedRating(rating); // Update the selected star rating.
-  }
+  };
 
   const handleRatingSubmit = () => {
     // Use selectedRating to submit the user's rating.
     setUserRating(selectedRating);
     closeRatingModal();
-  }
+
+    // Store user rating in local storage for the current movie
+    const ratings = JSON.parse(localStorage.getItem("movieRatings")) || {};
+    ratings[id] = selectedRating;
+    localStorage.setItem("movieRatings", JSON.stringify(ratings));
+  };
 
   return (
     <div className="movie">
