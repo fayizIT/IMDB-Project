@@ -10,18 +10,19 @@ const MovieList = () => {
   const { type } = useParams();
 
   useEffect(() => {
-    getData();
-  }, [type]); // Include 'getData' in the dependency array
+    // Define the getData function inside the useEffect to capture 'type' as a dependency
+    const getData = () => {
+      fetch(
+        `https://api.themoviedb.org/3/movie/${
+          type ? type : "popular"
+        }?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
+      )
+        .then((res) => res.json())
+        .then((data) => setMovieList(data.results));
+    };
 
-  const getData = () => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${
-        type ? type : "popular"
-      }?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
-    )
-      .then((res) => res.json())
-      .then((data) => setMovieList(data.results));
-  };
+    getData(); // Call the function when the component mounts
+  }, [type]);
 
   // Handle search query change
   useEffect(() => {
@@ -33,7 +34,7 @@ const MovieList = () => {
     } else {
       setFilteredMovies(movieList);
     }
-  }, [searchQuery, movieList]);
+  }, [searchQuery, movieList]); // Include 'movieList' in the dependency array
 
   return (
     <div className="movie__list">
