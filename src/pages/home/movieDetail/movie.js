@@ -130,11 +130,7 @@ const Movie = () => {
           <div key={company.id}>
             {company.logo_path && (
               <span className="productionCompanyImage">
-                <img
-                  className="movie__productionCompany"
-                  src={`https://image.tmdb.org/t/p/original${company.logo_path}`}
-                  alt={company.name}
-                />
+               
                 <span>{company.name}</span>
               </span>
             )}
